@@ -8,17 +8,24 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="findAllTradesNotByUser", query="from NominatedTrade t where t.sellerID=:userID or t.buyerID=:userID")
+	@NamedQuery(name="findAllTradesByUser", query="from NominatedTrade t where t.sellerID=:userID or t.buyerID=:userID")
 })
 public class NominatedTrade {
 
 	private Integer tradeID;
 	
-	private Integer sellerID;
+	private Integer partyID;
 	
-	private Integer buyerID;
+	/*
+	 * if(partyID == userID) {
+	 *    SELL
+	 * }
+	 * else BUY
+	 */
 	
-	private Integer metID;
+	private Integer counterpartyID;
+	
+	private Integer commodityID;
 	
 	private Integer locationID;
 	
@@ -45,9 +52,9 @@ public class NominatedTrade {
 			Date date, Double price, Integer quantity, String tradeDescription) {
 		super();
 		this.tradeID = tradeID;
-		this.sellerID = sellerID;
-		this.buyerID = buyerID;
-		this.metID = metID;
+		this.partyID = sellerID;
+		this.counterpartyID = buyerID;
+		this.commodityID = metID;
 		this.locationID = locationID;
 		this.date = date;
 		this.price = price;
@@ -64,27 +71,27 @@ public class NominatedTrade {
 	}
 
 	public Integer getSellerID() {
-		return sellerID;
+		return partyID;
 	}
 
 	public void setSellerID(Integer sellerID) {
-		this.sellerID = sellerID;
+		this.partyID = sellerID;
 	}
 
 	public Integer getBuyerID() {
-		return buyerID;
+		return counterpartyID;
 	}
 
 	public void setBuyerID(Integer buyerID) {
-		this.buyerID = buyerID;
+		this.counterpartyID = buyerID;
 	}
 
 	public Integer getMetID() {
-		return metID;
+		return commodityID;
 	}
 
 	public void setMetID(Integer metID) {
-		this.metID = metID;
+		this.commodityID = metID;
 	}
 
 	public Integer getLocationID() {

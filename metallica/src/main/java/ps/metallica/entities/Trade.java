@@ -17,9 +17,9 @@ public class Trade {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer tradeID;
 	
-	private Integer sellerID;
+	private Integer partyID;
 	
-	private Integer metID;
+	private Integer commodityID;
 	
 	private Integer locationID;
 	
@@ -36,8 +36,8 @@ public class Trade {
 	public Trade(Integer sellerID, Integer metID, Integer locationID, Double price, Integer quantity,
 			String tradeDescription) {
 		super();
-		this.sellerID = sellerID;
-		this.metID = metID;
+		this.partyID = sellerID;
+		this.commodityID = metID;
 		this.locationID = locationID;
 		this.price = price;
 		this.quantity = quantity;
@@ -53,19 +53,19 @@ public class Trade {
 	}
 
 	public Integer getSellerID() {
-		return sellerID;
+		return partyID;
 	}
 
 	public void setSellerID(Integer sellerID) {
-		this.sellerID = sellerID;
+		this.partyID = sellerID;
 	}
 
 	public Integer getMetID() {
-		return metID;
+		return commodityID;
 	}
 
 	public void setMetID(Integer metID) {
-		this.metID = metID;
+		this.commodityID = metID;
 	}
 
 	public Integer getLocationID() {
