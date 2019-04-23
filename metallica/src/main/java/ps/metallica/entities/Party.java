@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Party {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,11 +19,11 @@ public class User {
 	@Column(name="USER_EMAIL", unique=true)
 	private String email;
 	
-	public User() {
+	public Party() {
 		super();
 	}
 	
-	public User(String password, String firstName, String lastName, String email) {
+	public Party(String password, String firstName, String lastName, String email) {
 		super();
 		this.password = password;
 		this.firstName = firstName;
