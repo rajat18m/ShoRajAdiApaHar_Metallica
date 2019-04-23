@@ -9,9 +9,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="findAllCommodities", query="from Commodity m")
-})
 public class Commodity {
 
 	@Id

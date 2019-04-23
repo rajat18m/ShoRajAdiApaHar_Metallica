@@ -9,9 +9,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="findUserByEmail", query="from User u where u.email=:userEmail")
-})
 public class User {
 
 	@Id

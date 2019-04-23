@@ -8,9 +8,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="findAllTradesNotByUser", query="from Trade t where t.sellerID!=:userID")
-})
 public class Trade {
 	
 	@Id

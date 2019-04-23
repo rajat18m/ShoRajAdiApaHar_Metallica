@@ -7,9 +7,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name="findAllTradesByUser", query="from NominatedTrade t where t.sellerID=:userID or t.buyerID=:userID")
-})
 public class NominatedTrade {
 
 	private Integer tradeID;
