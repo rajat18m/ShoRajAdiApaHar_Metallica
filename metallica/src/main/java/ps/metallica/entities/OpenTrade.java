@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Trade {
+public class OpenTrade {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,11 +24,11 @@ public class Trade {
 	
 	private String tradeDescription;
 
-	public Trade() {
+	public OpenTrade() {
 		super();
 	}
 
-	public Trade(Integer sellerID, Integer metID, Integer locationID, Double price, Integer quantity,
+	public OpenTrade(Integer sellerID, Integer metID, Integer locationID, Double price, Integer quantity,
 			String tradeDescription) {
 		super();
 		this.partyID = sellerID;
