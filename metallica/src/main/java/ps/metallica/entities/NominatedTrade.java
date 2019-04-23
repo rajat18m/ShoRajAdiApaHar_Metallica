@@ -3,8 +3,6 @@ package ps.metallica.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
 public class NominatedTrade {
