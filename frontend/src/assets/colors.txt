@@ -1,0 +1,7 @@
+background : #2A2D2E
+primary : #1EB980
+primaryDark : #045D56
+accent_1 : #FF6859
+accent_2 : #FFCF44
+accent_3 : #B15DFF
+accent_4 : #72DEFF
