@@ -32,6 +32,16 @@ public class UserSessionController {
 		return "redirect:/dashboard";
 	}
 	
+	@GetMapping("/api/*")
+	public String userSession(Model model, HttpSession session, HttpServletRequest request) {
+		Party party = (Party) session.getAttribute("PARTY");
+		if(party == null) {
+			return "redirect:/login";
+		}
+		model.addAttribute("currentParty", party);
+		return request.getRequestURI().toString();
+	}
+	
 	@PostMapping("/api/user")
 	public String userRegistration(@RequestParam("email") String email, @RequestParam("password") String password,
 			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, HttpServletRequest request) {
