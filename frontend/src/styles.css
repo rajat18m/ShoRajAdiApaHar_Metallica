@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+/*font-family: 'Eczar', serif;*/
+/*font-family: 'Roboto Condensed', sans-serif;*/
+html {
+    background-color: #2A2D2E !important;
+    color: #FCFDFC !important;
+}
+
+.eczarified {
+    font-family: 'Eczar', serif ;
+}
+
+.robo-condensed {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.far-end {
+    margin-left: 300%;
+}
+
+.metallica-border-left {
+    border-color: #1EB980 !important;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 6px !important;
+    border-style: solid !important;
+}
+
+.metallica-border-bot {
+    border-color: #045D56 !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 5% !important;
+    border-style: solid !important;
+}
+
+.metallica-border-sides {
+    border-color: #045D56 !important;
+    border-left-width: 3px !important;
+    border-right-width: 3px !important;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-style: solid !important;
+    margin: 5px;
+}
+
+.accent1 {
+    border-color: #FF6859 !important;
+}
+
+.accent2 {
+    border-color: #FFCF44 !important;
+}
+
+.accent3 {
+    border-color: #B15DFF !important;
+}
+
+.accent4 {
+    border-color: #72DEFF !important;
+}
