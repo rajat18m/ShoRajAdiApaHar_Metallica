@@ -1,21 +1,44 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 /*font-family: 'Eczar', serif;*/
 /*font-family: 'Roboto Condensed', sans-serif;*/
-html {
+* {
     background-color: #2A2D2E !important;
     color: #FCFDFC !important;
+    padding: 0.2rem;
+    font-family: 'Roboto Condensed', sans-serif !important;
+}
+
+.centerify {
+    margin: 0 auto;
+}
+
+.no-pad {
+    padding: 0px !important;
+}
+
+.pad-top {
+    padding-top: 8px !important;
+    padding-bottom: 0px !important;
+    vertical-align: middle;
 }
 
 .eczarified {
-    font-family: 'Eczar', serif ;
+    font-family: 'Eczar', serif !important;
 }
 
 .robo-condensed {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif !important;
 }
 
 .far-end {
     margin-left: 300%;
+}
+
+.quantity-selector {
+    height:42px;
+    width: 66px;
+    float: right;
+    margin-top: 5px;
 }
 
 .metallica-border-left {
@@ -25,6 +48,8 @@ html {
     border-bottom-width: 0px;
     border-left-width: 6px !important;
     border-style: solid !important;
+    padding-left: 8px;
+    margin-bottom: 8px;
 }
 
 .metallica-border-bot {
@@ -44,6 +69,34 @@ html {
     border-bottom-width: 0px;
     border-style: solid !important;
     margin: 5px;
+}
+
+.metallica-border-all {
+    border-color: #045D56 !important;
+    border-width: 2px !important;
+    border-style: solid !important;
+    padding: 5px;
+}
+
+.metallica-border-verticals {
+    border-color: #045D56 !important;
+    border-top-width: 2px !important;
+    border-bottom-width: 2px !important;
+    border-style: solid !important;
+    padding: 5px;
+}
+
+.metallica-component {
+    border-color: #1EB980 !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    margin: 5px;
+    float: right;
+}
+
+.metallica-component:hover {
+    background-color: #1EB980 !important;
+    transition: 0.4s;
 }
 
 .accent1 {
