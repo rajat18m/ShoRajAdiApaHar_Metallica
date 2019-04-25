@@ -12,13 +12,18 @@
     margin: 0 auto;
 }
 
+.welcome {
+    display: inline-block;
+}
+
 .no-pad {
     padding: 0px !important;
 }
 
-.pad-top {
-    padding-top: 8px !important;
+.margin-top {
+    margin-top: 16px !important;
     padding-bottom: 0px !important;
+    padding-left: 4px;
     vertical-align: middle;
 }
 

@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector : 'login',
     template: `
-    <h3 class="metallica-border-left">Welcome to <span class="eczarified">Metallica</span></h3>
+    <div class="nav metallica-border-left">
+    <img src="./assets/logo.png">
+    <h3 class="margin-top">Welcome to <span class="eczarified">Metallica</span></h3>
+    </div>
     <br>
     <br>
     <div class="card metallica-border-all" style="width: 20rem;">
