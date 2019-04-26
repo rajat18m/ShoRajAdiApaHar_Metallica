@@ -79,6 +79,19 @@
     margin-bottom: 8px;
 }
 
+.metallica-border-left-even-pad {
+    border-color: #1EB980 !important;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 6px !important;
+    border-style: solid !important;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
 .metallica-border-bot {
     border-color: #045D56 !important;
     border-left-width: 0px !important;

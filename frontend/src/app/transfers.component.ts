@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { Metal } from 'src/model/Metal';
 
@@ -9,12 +9,12 @@ import { Metal } from 'src/model/Metal';
       <app-navbar></app-navbar>
     </div>
     <br>
-    <div class="row">
+    <div class="row metallica-border-left">
       <app-transfer-sell-item></app-transfer-sell-item>
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row metallica-border-left">
       <div class="card metallica-border-all" style="width: 14rem;">
         <div class="search-bar-part">
             <form class="form-inline">
@@ -23,8 +23,6 @@ import { Metal } from 'src/model/Metal';
         </div>
       </div>
     </div>
-    <br>
-    <br>
     <br>
     <h4 class="eczarified metallica-border-left" style="margin-top: 8px;">Market</h4>
     <br>
@@ -36,6 +34,7 @@ import { Metal } from 'src/model/Metal';
 export class TransfersTabComponent implements OnInit {
 
   metals: Array<Metal> = []
+
 
   constructor() { }
 
