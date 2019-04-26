@@ -25,7 +25,7 @@ import { SearchPipe } from './pipes/search.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
