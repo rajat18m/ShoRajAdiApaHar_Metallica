@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NominatedTrade } from '../model/NominatedTrade';
+import { NominatedTrade, Side } from '../model/NominatedTrade';
+import { Metal } from 'src/model/Metal';
 
 @Component({
     selector: 'app-trades-bar',
@@ -30,12 +31,12 @@ export class TradesTabComponent implements OnInit {
             { name: "Diamond", seller: "Consectitor", price: 9877, quantity: 24 }
           ]
         this.nominatedTrades = [
-            {date: initDate, metal: this.metals.pop(), side: "BUY"},
-            {date: initDate, metal: this.metals.pop(), side: "SELL"},
-            {date: initDate, metal: this.metals.pop(), side: "SELL"},
-            {date: initDate, metal: this.metals.pop(), side: "BUY"},
-            {date: initDate, metal: this.metals.pop(), side: "SELL"},
-            {date: initDate, metal: this.metals.pop(), side: "BUY"},
+            {date: initDate, metal: this.metals.pop(), side: Side.BUY},
+            {date: initDate, metal: this.metals.pop(), side: Side.SELL},
+            {date: initDate, metal: this.metals.pop(), side: Side.SELL},
+            {date: initDate, metal: this.metals.pop(), side: Side.BUY},
+            {date: initDate, metal: this.metals.pop(), side: Side.SELL},
+            {date: initDate, metal: this.metals.pop(), side: Side.BUY},
         ]
     }
 }

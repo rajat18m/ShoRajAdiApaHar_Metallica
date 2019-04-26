@@ -1,4 +1,6 @@
-class NominatedTrade {
+import { Metal } from './Metal';
+
+export class NominatedTrade {
 
     date: Date
     metal: Metal
@@ -12,7 +14,7 @@ class NominatedTrade {
 
 }
 
-enum Side {
+export enum Side {
     BUY = "BUY",
     SELL = "SELL"
 }

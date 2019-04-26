@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar.component';
 import { TransfersComponent } from './transfers-current-sales.component';
-import { TransfersSearchBar } from './transfers-searchbar.component';
 import { TransfersSellItemComponent } from './transfers-sell-item.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
@@ -15,12 +14,13 @@ import { TradesSearchBarComponent } from './trades-searchbar.component';
 import { TradesTabComponent } from './trades.component';
 import { TradesViewAllComponent } from './trades-viewtrades.component';
 import { TradesTableHeaderComponent } from './trades-table-header.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent, NavbarComponent, TransfersComponent, TransfersSearchBar, TransfersSellItemComponent,
+    AppComponent, NavbarComponent, TransfersComponent, TransfersSellItemComponent,
     LoginComponent, RegisterComponent, TransfersTabComponent, TradesSearchBarComponent, TradesTabComponent,
-    TradesViewAllComponent, TradesTableHeaderComponent
+    TradesViewAllComponent, TradesTableHeaderComponent, SearchPipe
   ],
   imports: [
     BrowserModule,

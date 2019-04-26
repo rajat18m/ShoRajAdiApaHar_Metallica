@@ -1,4 +1,4 @@
-class Metal {
+export class Metal {
 
     name: string
     seller: string
