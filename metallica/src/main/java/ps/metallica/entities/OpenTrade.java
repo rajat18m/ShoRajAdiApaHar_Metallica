@@ -12,6 +12,7 @@ public class OpenTrade {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer tradeID;
 	
+	
 	private Integer partyID;
 	
 	private Integer commodityID;
@@ -22,21 +23,18 @@ public class OpenTrade {
 	
 	private Integer quantity;
 	
-	private String tradeDescription;
-
 	public OpenTrade() {
 		super();
 	}
 
-	public OpenTrade(Integer sellerID, Integer metID, Integer locationID, Double price, Integer quantity,
-			String tradeDescription) {
+	public OpenTrade(Integer sellerID, Integer metID, Integer locationID, Double price, Integer quantity
+			) {
 		super();
 		this.partyID = sellerID;
 		this.commodityID = metID;
 		this.locationID = locationID;
 		this.price = price;
 		this.quantity = quantity;
-		this.tradeDescription = tradeDescription;
 	}
 
 	public Integer getTradeID() {
@@ -87,12 +85,6 @@ public class OpenTrade {
 		this.quantity = quantity;
 	}
 
-	public String getTradeDescription() {
-		return tradeDescription;
-	}
 
-	public void setTradeDescription(String tradeDescription) {
-		this.tradeDescription = tradeDescription;
-	}
 
 }

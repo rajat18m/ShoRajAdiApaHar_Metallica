@@ -3,8 +3,12 @@ package ps.metallica.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
+@Table(name="Trade")
 public class NominatedTrade {
 
 	private Integer tradeID;
@@ -23,14 +27,13 @@ public class NominatedTrade {
 	private Integer commodityID;
 	
 	private Integer locationID;
-	
+
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	private Double price;
 	
 	private Integer quantity;
-	
-	private String tradeDescription;
 
 	public NominatedTrade() {
 		super();
@@ -44,7 +47,7 @@ public class NominatedTrade {
 	 *    NominatedTrade nomTrade = new NominatedTrade(t.getTradeID(), ..., tx.getDate(), ...);
 	 */
 	public NominatedTrade(Integer tradeID, Integer sellerID, Integer buyerID, Integer metID, Integer locationID,
-			Date date, Double price, Integer quantity, String tradeDescription) {
+			Date date, Double price, Integer quantity) {
 		super();
 		this.tradeID = tradeID;
 		this.partyID = sellerID;
@@ -54,7 +57,6 @@ public class NominatedTrade {
 		this.date = date;
 		this.price = price;
 		this.quantity = quantity;
-		this.tradeDescription = tradeDescription;
 	}
 
 	public Integer getTradeID() {
@@ -121,12 +123,4 @@ public class NominatedTrade {
 		this.quantity = quantity;
 	}
 
-	public String getTradeDescription() {
-		return tradeDescription;
-	}
-
-	public void setTradeDescription(String tradeDescription) {
-		this.tradeDescription = tradeDescription;
-	}
-	
 }

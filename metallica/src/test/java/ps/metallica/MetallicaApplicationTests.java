@@ -9,8 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class MetallicaApplicationTests {
 
+	
 	@Test
 	public void contextLoads() {
+	
 	}
 
 }

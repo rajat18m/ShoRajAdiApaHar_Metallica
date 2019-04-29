@@ -1,13 +1,25 @@
 package ps.metallica.entities;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Party {
+public class Party implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -16,20 +28,36 @@ public class Party {
 	private String password;
 	private String firstName;
 	private String lastName;
+	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Location location;
+	
 	@Column(name="USER_EMAIL", unique=true)
 	private String email;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Assets> assets;
+	
 	
 	public Party() {
 		super();
 	}
 	
-	public Party(String password, String firstName, String lastName, String email) {
+
+
+	public Party(Integer userID, String password, String firstName, String lastName, Location location, String email,
+			List<Assets> assets) {
 		super();
+		this.userID = userID;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.location = location;
 		this.email = email;
+		this.assets = assets;
 	}
+
+
 
 	public Integer getUserID() {
 		return userID;
@@ -70,5 +98,27 @@ public class Party {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<Assets> getAssets() {
+		return assets;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+
+
+	public void setAssets(List<Assets> assets) {
+		this.assets = assets;
+	}
+
+	
 	
 }
