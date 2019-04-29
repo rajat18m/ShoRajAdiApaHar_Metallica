@@ -43,6 +43,33 @@ public class TradeServiceRest {
 	OpenTradeRepo openTradeRepo;
 	
 	
+	@RequestMapping(path="/fetchOpenTrades",method=RequestMethod.GET)
+	public List<OpenTrade> fetchOpenTrades(@RequestParam("userId") Integer userId)
+	{
+		return openTradeRepo.fetchOpenTrades(userId);
+	}
+	
+	@RequestMapping(path="/getUserByEmail",method=RequestMethod.GET)
+	public ResponseEntity<Party> getUserByEmail(@RequestParam("email") String email)
+	{
+		Party party=partyManagementRepo.findPartyByEmail(email);
+		 HttpStatus userStatus = HttpStatus.NOT_FOUND;
+		 if(party!=null)
+			 userStatus=HttpStatus.FOUND;
+		 return new ResponseEntity<Party>(party,userStatus);
+			
+	}
+	
+	@RequestMapping(path="/getUser",method=RequestMethod.GET)
+	public ResponseEntity<Party> getUser(@RequestParam("userId") Integer userId)
+	{
+		Party party=partyManagementRepo.findPartyByuserID(userId);
+		 HttpStatus userStatus = HttpStatus.NOT_FOUND;
+		 if(party!=null)
+			 userStatus=HttpStatus.FOUND;
+		 return new ResponseEntity<Party>(party,userStatus);
+	}
+	
 	@RequestMapping(path="/viewAll",method=RequestMethod.GET)
 	public List<NominatedTrade> viewAll(@RequestParam("userId") String userId)
 	{

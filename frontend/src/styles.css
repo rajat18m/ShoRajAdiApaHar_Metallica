@@ -8,6 +8,11 @@
     font-family: 'Roboto Condensed', sans-serif !important;
 }
 
+.error {
+    color: #FF6859;
+    padding: 2rem;
+}
+
 .market-data {
     width: 450px;
     margin: 0 auto;

@@ -21,7 +21,7 @@ export class TokenUtils {
         return retVal
     }
 
-    // Hashlib
+    // Generates Salted Hash
     sha512It(inp: string) : string {
 
         // First salting
