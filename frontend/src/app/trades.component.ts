@@ -36,11 +36,14 @@ export class TradesTabComponent implements OnInit {
         var currentParty: Party = this.sessionUtils.getCurrentParty()
 
         // Now adding to list
-        this.http.get('http://10.151.61.56:8082/viewAll/?userId=' + currentParty.partyID.toString()).subscribe((res) => {
-            console.log("List of Nominated Trades: " + res);
-            var arr = res as Array<PrototypeNominatedTrade>
+        this.http.get('http://10.151.61.56:8082/api/viewAll/?userId=' + currentParty.userID.toString()).subscribe((res) => {
+            console.log("List of Nominated Trades: " + JSON.stringify(res));
+            var arr = res as Array<any>
             arr.forEach(element => {
-                this.nominatedTrades.push(element.convertToNominatedTrade(this.http, currentParty.partyID))
+                var provNomTrade = new PrototypeNominatedTrade(element["tradeID"], element["sellerID"], element["buyerID"], element["metID"], element["locationID"], element["date"], element["price"], element["quantity"])
+                provNomTrade.convertToNominatedTrade(this.http, currentParty.userID).subscribe((output) => {
+                    this.nominatedTrades.push(output)
+                })
             });
         })
         console.log("Finished nominatedTrades : " + this.nominatedTrades)

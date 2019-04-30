@@ -26,7 +26,7 @@ import { HttpClient } from '@angular/common/http';
   </div>
   
 
-  <button type="submit" class="btn btn-primary metallica-component" (click)="authenticate(emailText.value, passwordText.value)">Log In</button>
+  <button type="button" class="btn btn-primary metallica-component" (click)="authenticate(emailText.value, passwordText.value)">Log In</button>
 
 
 
@@ -42,6 +42,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class LoginComponent implements OnInit {
 
+  currentParty: Party = null
   private sessionUtils: SessionUtils
 
   constructor(private http: HttpClient, private router: Router) {
@@ -52,22 +53,26 @@ export class LoginComponent implements OnInit {
     this.sessionUtils = new SessionUtils()
   }
 
-  authenticate(em: string, pw: string) {
+
+
+  authenticate(em: string, password: string) {
     // Setting variables
-    var currentParty: Party = this.sessionUtils.getPartyByEmail(em, this.http)
-    currentParty.password = pw
-    // Now Authenticating
-    if(this.sessionUtils.validatePartyOnLogin(currentParty, this.http)) {
-      // Setting current user
-      this.sessionUtils.storeParty(currentParty)
-      // Send to transfers page
-      this.router.navigateByUrl('/transfers')
-    }
-    else {
-      // Alert user about invalid credentials
-      alert("Invalid credentials!")
-    }
+    this.sessionUtils.getPartyByEmail(em, this.http).subscribe((res) => {
+      this.currentParty = res
+      this.currentParty.password = password
+      console.log("Edited party is : " + JSON.stringify(this.currentParty))
+      this.sessionUtils.validatePartyOnLogin(this.currentParty, this.http).subscribe((response) => {
+        if(response){
+          // Setting current user
+          this.sessionUtils.storeParty(this.currentParty)
+          // Send to transfers page
+          this.router.navigate(['/transfers']);
+        }
+        else {
+          // Alert user about invalid credentials
+          alert("Invalid credentials!")
+        }
+      })
+    })
   }
-
-
 }

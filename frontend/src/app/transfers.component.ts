@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { OpenTrade } from 'src/model/OpenTrade';
 import { HttpClient } from '@angular/common/http';
+import { SessionUtils } from './utils/SessionUtils';
 
 @Component({
   selector: 'app-transfers-tab',
@@ -34,14 +35,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TransfersTabComponent implements OnInit {
 
+  sessionUtils: SessionUtils
+
   metals: Array<OpenTrade> = []
 
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://10.151.61.56:8082/fetchOpenTrades/').subscribe((res) => {
-      console.log("Received Open trades : "+res)
+    this.sessionUtils = new SessionUtils()
+    var uID: number = this.sessionUtils.getCurrentParty().userID
+    this.http.get('http://10.151.61.56:8082/api/fetchOpenTrades/?userId='+uID).subscribe((res) => {
+      console.log("Received Open trades : "+JSON.stringify(res))
       this.metals = res as Array<OpenTrade>
       console.log("Before initiating names, this.metals = "+this.metals)
       this.metals.forEach(elem => {

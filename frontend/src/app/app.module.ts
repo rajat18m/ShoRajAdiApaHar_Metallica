@@ -15,17 +15,25 @@ import { TradesTabComponent } from './trades.component';
 import { TradesViewAllComponent } from './trades-viewtrades.component';
 import { TradesTableHeaderComponent } from './trades-table-header.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { ErrorComponent } from './errorpage.component';
+import { MarketDataComponent } from './marketdata.component';
+import { MarketDataHolderComponent } from './marketdata-holder.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, TransfersComponent, TransfersSellItemComponent,
     LoginComponent, RegisterComponent, TransfersTabComponent, TradesSearchBarComponent, TradesTabComponent,
-    TradesViewAllComponent, TradesTableHeaderComponent, SearchPipe
+    TradesViewAllComponent, TradesTableHeaderComponent, SearchPipe, ErrorComponent, MarketDataComponent,
+    MarketDataHolderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

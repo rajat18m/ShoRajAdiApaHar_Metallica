@@ -39,6 +39,14 @@
     100% { transform: translate(-100%, 0); }
 }
 
+.rounded-button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    border-radius: 80px 80px 80px 80px;
+}
+
 .centerify {
     margin: 0 auto;
 }
@@ -74,7 +82,7 @@
 }
 
 .far-end {
-    margin-left: 300%;
+    margin-left: 100%;
 }
 
 .table-item {

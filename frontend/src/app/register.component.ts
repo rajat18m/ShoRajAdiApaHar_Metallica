@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 
     register(firstName: string, lastName: string, email: string, password: string) {
       // Sending POST request to register
-      this.http.post('http://10.151.61.56:8082/par/', new RegistrationParty(password, firstName, lastName, email))
+      this.http.post('http://10.151.61.56:8082/api/par/', new RegistrationParty(password, firstName, lastName, email))
       // Alerting the success
       alert("Successfully Registered!")
       // Now redirecting to login screen

@@ -12,7 +12,7 @@ import { NominatedTrade } from '../model/NominatedTrade';
                         <span class="table-item metallica-border-left accent2">{{metalName}}</span>
                         <span class="table-item metallica-border-left accent3">{{side}}</span>
                         <span class="table-item metallica-border-left accent4">{{quantity}} MT</span>
-                        <span class="table-item metallica-border-left">{{price}}/MT</span>
+                        <span class="table-item metallica-border-left">\${{price}}/MT</span>
                         <span class="table-item metallica-border-left accent5">{{counterpartyName}}</span>
                         </li>
                 </div>

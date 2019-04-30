@@ -1,24 +1,38 @@
 import * as sha512 from 'js-sha512';
 import { Party } from 'src/model/Party';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export class TokenUtils {
 
     private token: string = ""
 
-    validateToken(token: string, email: string) : boolean {
-        this.token = this.generateAccessToken(email)
-        return token == this.token
+    validateToken(token: string, email: string, http: HttpClient) : Observable<boolean> {
+        return new Observable((observable) => {
+            this.generateAccessToken(email, http).subscribe((tok) => {
+                this.token = tok
+                var retVal : boolean = (token == this.token)
+                observable.next(retVal)
+                observable.complete()
+            })
+        })
     }
 
-    generateAccessToken(partyEmail : string) : string {
-        var retVal = ""
-        var actualParty: Party = null
-        // fetch party using email here
-
-        // Generating Access Token by passing concatenated ID and password
-        this.sha512It(actualParty.partyID+actualParty.password)
-
-        return retVal
+    generateAccessToken(partyEmail : string, http: HttpClient) : Observable<string> {
+        return new Observable((observable) => {
+            var retVal = ""
+            var actualParty: Party = null
+            // fetch party using email here
+            http.get('http://10.151.61.56:8082/api/getUserByEmail/?email='+partyEmail).subscribe((res) => {
+                console.log("Received user :"+JSON.stringify(res)+"\n as Party with email = "+partyEmail)
+                actualParty = res as Party
+                // Generating Access Token by passing concatenated ID and password
+                retVal = this.sha512It(actualParty.userID+actualParty.password)
+                console.log("Salted Hash (retVal) = "+retVal)
+                observable.next(retVal)
+                observable.complete()
+            })
+        });
     }
 
     // Generates Salted Hash

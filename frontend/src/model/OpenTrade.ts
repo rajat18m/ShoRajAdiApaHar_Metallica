@@ -24,14 +24,14 @@ export class OpenTrade {
     }
 
     initiateNames(http: HttpClient) {
-        http.get('http://10.151.61.56:8082/getUser/?userId='+this.partyID).subscribe((res) => {
+        http.get('http://10.151.61.56:8082/api/getUser/?userId='+this.partyID).subscribe((res) => {
             console.log("Retrieved Party is : "+res)
             var currParty: Party = res as Party
             console.log("currParty = "+currParty)
             this.partyName = currParty.firstName
             console.log("this.partyName = "+this.partyName)
         })
-        http.get('http://10.151.61.56:8082/?id='+this.commodityID).subscribe((res) => {
+        http.get('http://10.151.61.56:8082/api/?id='+this.commodityID).subscribe((res) => {
             console.log("Retrieved Commodity is : "+res)
             var currCommodity: ProvisionalCommodity = res as ProvisionalCommodity
             console.log("currCommodity = "+currCommodity)

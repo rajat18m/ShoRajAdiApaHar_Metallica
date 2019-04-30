@@ -11,7 +11,7 @@ import { SessionUtils } from './utils/SessionUtils';
     <form class="form-inline">
         <div class="form-group">
             <label for="exampleFormControlSelect1" class="metallica-border-left-even-pad accent1">Select Metal</label>
-                <select [(ngModel)]="commName" class="form-control" id="exampleFormControlSelect1">
+                <select #metalName class="form-control">
                     <option *ngFor="let commodity of commodities">{{commodity.commodityName}}</option>
                 </select>
         </div>
@@ -23,14 +23,14 @@ import { SessionUtils } from './utils/SessionUtils';
             <label for="formGroupExampleInput2" class="metallica-border-left-even-pad accent4">Quantity</label>
             <input #commQuantity type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Quantity of Metal">
         </div>
-        <button type="button" class="btn btn-primary metallica-component" (click)="sellItem(commPrice.value, commQuantity.value)">Sell</button>
+        <button type="button" class="btn btn-primary metallica-component" (click)="sellItem(metalName.value, commPrice.value, commQuantity.value)">Sell</button>
     </form>
     </div>
     `
 })
 export class TransfersSellItemComponent implements OnInit {
 
-    commName: string
+    commName: string = ""
     commodities: Array<ProvisionalCommodity> = []
     sessionUtils: SessionUtils
 
@@ -39,21 +39,30 @@ export class TransfersSellItemComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.http.get('http://10.151.61.56:8082/com').subscribe((res) => {
-            console.log("Obtained Commodities : "+res)
+        this.http.get('http://10.151.61.56:8082/api/com').subscribe((res) => {
+            console.log("Obtained Commodities : "+JSON.stringify(res))
             this.commodities = res as Array<ProvisionalCommodity>
-            console.log("this.commodities = "+this.commodities)
+            console.log("this.commodities = "+JSON.stringify(this.commodities))
         })
     }
 
-    sellItem(price, quantity) {
+    sellItem(nm, price, quantity) {
         var sellPrice: number = price as number
         var sellQuantity: number = quantity as number
+        this.commName = nm as string
         console.log("Values before selling item : "+sellPrice+", "+sellQuantity+", "+this.commName)
         // Now, creating NewTrade object to post.
-        var newTrade: NewTrade = new NewTrade(this.commName, sellPrice, sellQuantity, this.sessionUtils.getCurrentParty().partyID)
-        this.http.post('http://10.151.61.56:8082/createTransaction/', newTrade)
+        var newTrade: NewTrade = new NewTrade(this.commName, sellPrice, sellQuantity, this.sessionUtils.getCurrentParty().userID)
+        console.log("newTrade = "+JSON.stringify(newTrade))
+        this.http.post('http://10.151.61.56:8082/api/createTransaction', newTrade).subscribe((res) => {
+            console.log(JSON.stringify(res))
+        },
+        (error) => {
+            console.log(JSON.stringify(error))
+        }
+        )
         // Now, reloading the page to show updated trade.
         window.location.reload()
     }
+
 }

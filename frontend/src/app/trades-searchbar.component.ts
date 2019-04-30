@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SearchFilters } from 'src/model/SearchFilters';
 import { Side } from 'src/model/NominatedTrade';
+import { Party } from 'src/model/Party';
+import { HttpClient } from '@angular/common/http';
+import { ProvisionalCommodity } from 'src/model/ProvisionalCommodity';
 
 @Component({
     selector: 'app-trades-searchbar',
@@ -19,12 +22,7 @@ import { Side } from 'src/model/NominatedTrade';
             <div class="col">
                 <span class="metallica-border-left accent3">Commodity</span>
                 <select #metalName class="form-control margin-top">
-                    <option>Iron</option>
-                    <option>Copper</option>
-                    <option>Steel</option>
-                    <option>Bronze</option>
-                    <option>Aluminium</option>
-                    <option>Diamond</option>
+                    <option *ngFor="let commodity of commodities">{{commodity.commodityName}}</option>
                 </select>
             </div>
             <div class="col">
@@ -37,13 +35,7 @@ import { Side } from 'src/model/NominatedTrade';
             <div class="col">
             <span class="metallica-border-left accent4">Counterparty</span>
             <select #counterparty class="form-control margin-top">
-                <option>Lorem</option>
-                <option>Ipsum</option>
-                <option>Dolor</option>
-                <option>Sit</option>
-                <option>Amet</option>
-                <option>Consectitor</option>
-                <option>Adsiping</option>
+                <option *ngFor="let party of parties">{{party.firstName}}</option>
             </select>
             </div>
             <div class="col margin-top-super">
@@ -56,15 +48,31 @@ import { Side } from 'src/model/NominatedTrade';
 })
 export class TradesSearchBarComponent implements OnInit {
 
+    parties: Array<Party> = []
+    commodities: Array<ProvisionalCommodity> = []
+
     @Output() searchFilters = new EventEmitter<SearchFilters>();
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.http.get('http://10.151.61.56:8082/api/par/').subscribe((allParties) => {
+            var arr : Array<any> = allParties as Array<any>
+            arr.forEach((elem) => {
+                var currParty: Party = new Party(elem["userID"], elem["password"], elem["firstName"], elem["lastName"], elem["location"], elem["email"], elem["assets"]);
+                this.parties.push(currParty)
+            })
+        });
+        this.http.get('http://10.151.61.56:8082/api/com').subscribe((res) => {
+            console.log("Obtained Commodities : "+JSON.stringify(res))
+            this.commodities = res as Array<ProvisionalCommodity>
+            console.log("this.commodities = "+JSON.stringify(this.commodities))
+        });
+    }
 
     filterSearch(from, to, mName, side, counterparty) {
         var filters = new SearchFilters(from as Date, to as Date, mName as string, side as Side, counterparty as string);
-        console.log("Filters are : "+filters)
-        this.searchFilters.emit(filters);
+        console.log("Filters are : "+JSON.stringify(filters))
+        // this.searchFilters.emit(filters);
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionUtils } from './utils/SessionUtils';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -31,26 +32,29 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   private sessionUtils: SessionUtils
   username: string
-  constructor(private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.sessionUtils = new SessionUtils();
   }
 
   ngOnInit() {
-    if (!this.sessionUtils.validatePartyDuringSession()) {
-      // Redirect to Error Page
-      this.router.navigateByUrl('/error')
-    }
-    else {
-      // Setting username
-      this.username = this.sessionUtils.getCurrentParty().firstName
-    }
+    this.sessionUtils.validatePartyDuringSession(this.http).subscribe((result) => {
+      console.log("Result is : "+result)
+      if (!result) {
+        // Redirect to Error Page
+        this.router.navigate(['/error'])
+      }
+      else {
+        // Setting username
+        this.username = this.sessionUtils.getCurrentParty().firstName
+      }
+    })
   }
 
   logout() {
     // Clearing storage
     localStorage.clear()
     // Rerouting to login page
-    this.router.navigateByUrl('/')
+    this.router.navigate(['/'])
   }
 }
 
