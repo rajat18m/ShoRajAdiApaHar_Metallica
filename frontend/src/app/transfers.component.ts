@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { OpenTrade } from 'src/model/OpenTrade';
 import { HttpClient } from '@angular/common/http';
 import { SessionUtils } from './utils/SessionUtils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transfers-tab',
@@ -40,10 +41,14 @@ export class TransfersTabComponent implements OnInit {
   metals: Array<OpenTrade> = []
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.sessionUtils = new SessionUtils()
+    if(this.sessionUtils.getCurrentParty() == null) {
+      console.log("Failed authentication! Nice try hacker boy!")
+      this.router.navigate(['/error'])
+    }
     var uID: number = this.sessionUtils.getCurrentParty().userID
     this.http.get('http://10.151.61.56:8082/api/fetchOpenTrades/?userId='+uID).subscribe((res) => {
       console.log("Received Open trades : "+JSON.stringify(res))

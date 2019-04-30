@@ -6,6 +6,7 @@ import { SessionUtils } from './utils/SessionUtils';
 import { Party } from 'src/model/Party';
 import { PrototypeNominatedTrade } from 'src/model/PrototypeNominatedTrade';
 import { SearchFilters } from 'src/model/SearchFilters';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-trades-bar',
@@ -27,13 +28,18 @@ export class TradesTabComponent implements OnInit {
     metals: Array<Metal> = []
     sessionUtils: SessionUtils
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.sessionUtils = new SessionUtils()
     }
 
     ngOnInit() {
         // Getting current user
         var currentParty: Party = this.sessionUtils.getCurrentParty()
+
+        if(currentParty == null) {
+            console.log("Failed Authentication! Nice try hacker boy!")
+            this.router.navigate(['/error'])
+        }
 
         // Now adding to list
         this.http.get('http://10.151.61.56:8082/api/viewAll/?userId=' + currentParty.userID.toString()).subscribe((res) => {
@@ -45,7 +51,12 @@ export class TradesTabComponent implements OnInit {
                     this.nominatedTrades.push(output)
                 })
             });
-        })
+        },
+        (error) => {
+            console.log("Failed Authentication! Nice try hacker boy!")
+            this.router.navigate(['/error'])
+        }
+        )
         console.log("Finished nominatedTrades : " + this.nominatedTrades)
 
         // Adding metals

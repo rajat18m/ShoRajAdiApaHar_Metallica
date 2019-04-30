@@ -19,15 +19,15 @@ export class SessionUtils {
 
     validatePartyOnLogin(party: Party, http: HttpClient): Observable<boolean> {
         return new Observable((observable) => {
-        var actualParty: Party
-        this.getPartyByEmail(party.email, http).subscribe((res) => {
-            actualParty = res
-            // Send get request using email and assign to actualParty
-            console.log("Actual party is : " + JSON.stringify(actualParty) + "\nInputted party is : " + JSON.stringify(party))
-            var result : boolean = (party.userID == actualParty.userID) && (party.password == actualParty.password)
-            observable.next(result)
-            observable.complete()
-        })
+            var actualParty: Party
+            this.getPartyByEmail(party.email, http).subscribe((res) => {
+                actualParty = res
+                // Send get request using email and assign to actualParty
+                console.log("Actual party is : " + JSON.stringify(actualParty) + "\nInputted party is : " + JSON.stringify(party))
+                var result: boolean = (party.userID == actualParty.userID) && (party.password == actualParty.password)
+                observable.next(result)
+                observable.complete()
+            })
         });
     }
 
@@ -36,15 +36,24 @@ export class SessionUtils {
         return new Observable((observer) => {
             var currentParty: Party = this.getCurrentParty()
             // Now, checking tokens.
-            console.log("Email : "+currentParty.email)
+            console.log("Email : " + currentParty.email)
             this.tokenUtils.generateAccessToken(currentParty.email, http).subscribe((tokennnnnn) => {
                 var passIt: string = tokennnnnn
-                console.log("Token = "+passIt)
+                console.log("Token = " + passIt)
                 this.tokenUtils.validateToken(passIt, currentParty.email, http).subscribe((bool) => {
                     observer.next(bool)
                     observer.complete()
+                },
+                    (error) => {
+                        observer.next(false)
+                        observer.complete()
+                    }
+                )
+            },
+                (error) => {
+                    observer.next(false)
+                    observer.complete()
                 })
-            })
         })
     }
 
@@ -71,6 +80,6 @@ export class SessionUtils {
                         observer.complete()
                     })
             });
-        }
+    }
 
 }
