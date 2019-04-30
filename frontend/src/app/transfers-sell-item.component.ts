@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ProvisionalCommodity } from 'src/model/ProvisionalCommodity';
 
 @Component({
     selector: 'app-transfer-sell-item',
@@ -8,12 +10,7 @@ import { Component, OnInit } from '@angular/core';
         <div class="form-group">
             <label for="exampleFormControlSelect1" class="metallica-border-left-even-pad accent1">Select Metal</label>
                 <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Aluminium</option>
-                    <option>Bronze</option>
-                    <option>Copper</option>
-                    <option>Diamond</option>
-                    <option>Iron</option>
-                    <option>Steel</option>
+                    <option *ngFor="let commodity of commodities">{{commodity.commodityName}}</option>
                 </select>
         </div>
         <div class="form-group">
@@ -30,7 +27,16 @@ import { Component, OnInit } from '@angular/core';
     `
 })
 export class TransfersSellItemComponent implements OnInit {
-    constructor() { }
 
-    ngOnInit(): void { }
+    commodities: Array<ProvisionalCommodity> = []
+
+    constructor(private http: HttpClient) { }
+
+    ngOnInit(){
+        this.http.get('http://10.151.61.56:8082/com').subscribe((res) => {
+            console.log("Obtained Commodities : "+res)
+            this.commodities = res as Array<ProvisionalCommodity>
+            console.log("this.commodities = "+this.commodities)
+        })
+    }
 }

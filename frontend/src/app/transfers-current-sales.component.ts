@@ -17,6 +17,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TransfersComponent implements OnInit {
 
+    @Input('id') id: number = 0
     @Input('name') name: string = "None"
     @Input('seller') seller: string = "No Seller"
     @Input('price') price: number = 0

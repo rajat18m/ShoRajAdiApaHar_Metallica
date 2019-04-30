@@ -39,6 +39,11 @@ public class MarketRestController {
 		return commodityRepo.findCommodityByCommodityID(id);
 	}
 	
+	@RequestMapping(path="/com",method=RequestMethod.GET)
+	public List<Commodity> getAllCommodity(){
+		return commodityRepo.findAll();
+	}
+	
 	@RequestMapping(path="/loc",method=RequestMethod.POST)
 	public void putLocation(@RequestBody Location location) {
 		locationRepo.save(location);
