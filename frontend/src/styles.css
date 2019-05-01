@@ -8,13 +8,23 @@
     font-family: 'Roboto Condensed', sans-serif !important;
 }
 
+.small-text {
+    font-size: 1rem !important;
+    color: rgb(190, 193, 194) !important;
+}
+
+.contact-us {
+    margin: 0 auto;
+    width: 18rem;
+}
+
 .error {
     color: #FF6859;
     padding: 2rem;
 }
 
 .market-data {
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
     white-space: nowrap;
     overflow: hidden;
@@ -26,7 +36,7 @@
     display: inline-block;
     text-indent: 0;
     border: 1px #1EB980 solid;
-    animation: marquee 15s linear infinite;
+    animation: marquee 8.5s linear infinite;
 }
 
 .market-data-element:hover {

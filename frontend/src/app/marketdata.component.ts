@@ -21,12 +21,14 @@ export class MarketDataComponent implements OnInit{
   constructor(private http: HttpClient) { }
 
   ngOnInit(){
-    this.http.get('https://globalmetals.xignite.com/xGlobalMetals.json/GetRealTimeMetalQuotes?Symbols=XAUKG,XAGKG,XPTKG,XPDKG&Currency=INR&_fields=Name,Symbol,Ask&_token=12600EFFF7E243E3BBB6B8BEBD6BC29A')
+    this.http.get('https://globalmetals.xignite.com/xGlobalMetals.json/GetRealTimeMetalQuotes?Symbols=XAUKG,XAGKG,XPTKG,XPDKG&Currency=USD&_fields=Name,Symbol,Ask&_token=12600EFFF7E243E3BBB6B8BEBD6BC29A')
     .subscribe((res)=>{
       console.log("Market Data"+JSON.stringify(res))
       var arr: Array<any> = res as Array<any>
       arr.forEach((elem) => {
-        var currTicker : Ticker = new Ticker(elem["Name"], elem["Symbol"], elem["Ask"])
+        var name = elem["Name"].replace("Kg", "MT")
+        var price = (elem["Ask"] as number) * 1000
+        var currTicker : Ticker = new Ticker(name, elem["Symbol"], price)
         this.commodities.push(currTicker)
       })
       console.log("this.commodities = "+this.commodities);

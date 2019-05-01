@@ -38,6 +38,10 @@ import { RegistrationParty } from 'src/model/RegistrationParty';
 </div>
   <button type="submit" class="btn btn-primary metallica-component" (click)="register(fName.value, lName.value, email.value, password.value)">Register</button>
 </form>
+  <div class="card metallica-border-all accent2 contact-us" style="width: 10rem;">
+    <a href="mailto:administrator@metallica.com"><span class="contact-us">Contact Us</span></a>
+    <span class="small-text">(In case you previously own assets or would like to register your location)</span>
+  </div>
 </div>
     `
 })
@@ -53,11 +57,16 @@ export class RegisterComponent implements OnInit {
 
     register(firstName: string, lastName: string, email: string, password: string) {
       // Sending POST request to register
-      this.http.post('http://10.151.61.56:8082/api/par/', new RegistrationParty(password, firstName, lastName, email))
-      // Alerting the success
-      alert("Successfully Registered!")
-      // Now redirecting to login screen
-      this.router.navigate(['/'])
+      this.http.post('http://10.151.61.56:8082/api/par/', new RegistrationParty(password, firstName, lastName, email)).subscribe((result) => {
+        console.log("response on registration : "+JSON.stringify(result))
+        // Alerting the success
+        alert("Successfully Registered!")
+        // Now redirecting to login screen
+        this.router.navigate(['/'])
+      }, (error) => {
+        alert("Error occurred!")
+        console.log(JSON.stringify(error))
+      })
     }
 
     

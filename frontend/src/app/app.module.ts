@@ -20,13 +20,15 @@ import { MarketDataComponent } from './marketdata.component';
 import { MarketDataHolderComponent } from './marketdata-holder.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ResourcesHolderComponent } from './current-resources-holder.component';
+import { PaymentPageComponent } from './payment-page.component';
 
 @NgModule({
   declarations: [
     AppComponent, NavbarComponent, TransfersComponent, TransfersSellItemComponent,
     LoginComponent, RegisterComponent, TransfersTabComponent, TradesSearchBarComponent, TradesTabComponent,
     TradesViewAllComponent, TradesTableHeaderComponent, SearchPipe, ErrorComponent, MarketDataComponent,
-    MarketDataHolderComponent
+    MarketDataHolderComponent, ResourcesHolderComponent, PaymentPageComponent
   ],
   imports: [
     BrowserModule,
