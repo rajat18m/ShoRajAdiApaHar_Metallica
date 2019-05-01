@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
     <div class="row">
         <market-data></market-data>
     </div>
-    <app-trades-searchbar (searchFilters)="filterTrades(event)"></app-trades-searchbar>
+    <app-trades-searchbar (searchFilters)="filterTrades($event)"></app-trades-searchbar>
     <app-trades-table-header></app-trades-table-header>
     <app-trades-viewall *ngFor="let nTrade of nominatedTrades" [nominatedTrade]="nTrade"></app-trades-viewall>
     `

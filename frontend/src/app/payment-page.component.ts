@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
     <div>
     <app-navbar></app-navbar>
     <div class="card metallica-border-all centerify" style="width: 24rem;">
-        <span style="margin: 0 auto;">Congratulations! Purchase Successful!</span>
+        <span style="margin: 0 auto;">Congratulations! Trade Successful!</span>
         <img src="../assets/payment.png" style="width: 128px;margin: 0 auto;">
         <a class="btn btn-primary metallica-component" (click)="complete()" style="width: 12rem;margin: 0 auto;">Proceed</a>
     </div>
