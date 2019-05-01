@@ -38,7 +38,6 @@ export class TransfersSellItemComponent implements OnInit {
     commName: string = ""
     commodities: Array<ProvisionalCommodity> = []
     sessionUtils: SessionUtils
-    assets: Array<DBAsset> = []
     // partySessionUtils: PartySessionUtils
 
     constructor(private http: HttpClient, private router: Router) {
@@ -70,48 +69,37 @@ export class TransfersSellItemComponent implements OnInit {
                 console.log("Current asset is : " + JSON.stringify(asset))
                 var currID: number = asset["assetId"] as number
                 console.log("Current ID is : " + currID)
-                var commName: string = this.commName
-                var commQuan: number = asset["quantity"] as number
-                var dbAsset: DBAsset = new DBAsset(commName, commQuan)
-                console.log("dbAsset = " + JSON.stringify(dbAsset))
-                this.assets.push(dbAsset)
-            })
-
-            console.log("this.assets = " + JSON.stringify(this.assets))
-
-            var currentAsset: DBAsset = new DBAsset(this.commName, 0)
-
-            this.assets.forEach((asset) => {
-                if (asset.name == this.commName) {
-                    var currentQuan: number = currentAsset.quantity
-                    currentQuan += asset.quantity
-                    currentAsset.quantity = currentQuan
-                }
-            })
-
-            console.log("Current asset : " + JSON.stringify(currentAsset))
-
-            if (sellQuantity > currentAsset.quantity) {
-                // Insufficient quantity, so we're alerting.
-                alert("You don't have this much of " + currentAsset.name + "!")
-            }
-            else {
-                // Sufficient quantity, so we're proceeding.
-                // Now, creating NewTrade object to post.
-                var newTrade: NewTrade = new NewTrade(this.commName, sellPrice, sellQuantity, this.sessionUtils.getCurrentParty().userID)
-                console.log("newTrade = " + JSON.stringify(newTrade))
-                this.http.post('http://10.151.61.56:8082/api/createTransaction', newTrade).subscribe((res) => {
-                    alert("Successfully sold!")
-                    console.log(JSON.stringify(res))
-                },
-                    (error) => {
-                        alert("Error occurred!")
-                        console.log(JSON.stringify(error))
+                this.http.get('http://10.151.61.56:8082/api/comByIdentifier/?Identifier=' + asset["commodityIdentifier"]).subscribe((commodity) => {
+                    console.log("Current Commodity : "+JSON.stringify(commodity))
+                    var commName : string = commodity["commodityName"]
+                    console.log("Commodity Name = "+JSON.stringify(commName))
+                    var commQuan: number = asset["quantity"] as number
+                    var dbAsset: DBAsset = new DBAsset(commName, commQuan)
+                    console.log("dbAsset = " + JSON.stringify(dbAsset))
+                    if ((sellQuantity > dbAsset.quantity) && (dbAsset.name == this.commName)) {
+                        // Insufficient quantity, so we're alerting.
+                        alert("You don't have this much of " + dbAsset.name + "!")
                     }
-                )
-                // Now, reloading the page to show updated trade.
-                window.location.reload()
-            }
+                    else if((sellQuantity > dbAsset.quantity) && (dbAsset.name != this.commName)) {
+                        // Ignoring
+                    }
+                    else if((sellQuantity <= dbAsset.quantity) && (dbAsset.name == this.commName)) {
+                        // Sufficient quantity, so we're proceeding.
+                        // Now, creating NewTrade object to post.
+                        var newTrade: NewTrade = new NewTrade(this.commName, sellPrice, sellQuantity, this.sessionUtils.getCurrentParty().userID)
+                        console.log("newTrade = " + JSON.stringify(newTrade))
+                        this.http.post('http://10.151.61.56:8082/api/createTransaction', newTrade).subscribe((res) => {
+                            alert("Successfully sold!")
+                            console.log(JSON.stringify(res))
+                        },
+                            (error) => {
+                                alert("Error occurred!")
+                                console.log(JSON.stringify(error))
+                            }
+                        )
+                    }
+                })
+            })
         },
             (error) => {
                 this.router.navigate(['/error'])
