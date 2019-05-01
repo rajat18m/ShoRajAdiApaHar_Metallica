@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
       // Alerting the success
       alert("Successfully Registered!")
       // Now redirecting to login screen
-      this.router.navigateByUrl('/')
+      this.router.navigate(['/'])
     }
 
     

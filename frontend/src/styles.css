@@ -14,7 +14,7 @@
 }
 
 .market-data {
-    width: 450px;
+    width: 350px;
     margin: 0 auto;
     white-space: nowrap;
     overflow: hidden;
@@ -24,7 +24,6 @@
 
 .market-data-element {
     display: inline-block;
-    padding-left: 100%;
     text-indent: 0;
     border: 1px #1EB980 solid;
     animation: marquee 15s linear infinite;
@@ -86,7 +85,7 @@
 }
 
 .table-item {
-    margin-right:7.7rem;
+    margin-right:6rem;
 }
 
 .quantity-selector {
@@ -177,6 +176,19 @@
 
 .metallica-component:hover {
     background-color: #1EB980 !important;
+    transition: 0.4s;
+}
+
+.metallica-logout {
+    border-color: #FF6859 !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    margin: 5px;
+    float: right;
+}
+
+.metallica-logout:hover {
+    background-color: rgb(248, 83, 68) !important;
     transition: 0.4s;
 }
 

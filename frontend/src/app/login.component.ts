@@ -38,7 +38,6 @@ import { HttpClient } from '@angular/common/http';
 </div>
     `
 })
-// <a class="nav-link" routerLink="/register">Register</a>
 
 export class LoginComponent implements OnInit {
 

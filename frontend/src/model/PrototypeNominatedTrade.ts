@@ -32,8 +32,8 @@ export class PrototypeNominatedTrade {
 
         var metal: Metal
         
-        http.get('http://10.151.61.56:8082/api/?id='+this.commodityID.toString()).subscribe((res) => {
-            console.log("Current Metal : "+JSON.stringify(res));
+        http.get('http://10.151.61.56:8082/api/singleCom/?id='+this.commodityID.toString()).subscribe((res) => {
+            console.log("Received Metal : "+JSON.stringify(res));
             var id:number
             if(userID == this.partyID) { // Sell 
                 id = this.counterpartyID

@@ -22,17 +22,19 @@ export class PartySessionUtils {
         var allMetalNames: Array<string> = []
 
         // First, adding all assets to allAssets and all metal names to allMetalNames
-        this.assetsHelper.nominatedTrades.forEach(nomTrade => {
+        this.assetsHelper.fetchNominatedTrades(this.currentParty).subscribe((nominatedTrades) => {
+            nominatedTrades.forEach(nomTrade => {
 
-            allAssets.push(new Assets(nomTrade.metal.name, nomTrade.metal.quantity, nomTrade.side))
-            
-            // If allMetalNames doesn't include current metal's name
-            if(!(allMetalNames.includes(nomTrade.metal.name))) {
-                allMetalNames.push(nomTrade.metal.name)
-            }
-
-        });
-
+                allAssets.push(new Assets(nomTrade.metal.name, nomTrade.metal.quantity, nomTrade.side))
+                
+                // If allMetalNames doesn't include current metal's name
+                if(!(allMetalNames.includes(nomTrade.metal.name))) {
+                    allMetalNames.push(nomTrade.metal.name)
+                }
+    
+            });
+        })
+        
         // Now, processing.
         allMetalNames.forEach(metalName => {
             

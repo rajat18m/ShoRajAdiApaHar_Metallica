@@ -4,7 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
     selector: 'data-holder',
     template: `
     <div>
-        <span class="market-data-element"> {{symbol}}, {{name}}, {{ask}} </span>
+        <span class="market-data-element"> Symbol : {{symbol}}, {{name}}, \${{ask}}/MT </span>
     </div>
     `
 })

@@ -18,12 +18,12 @@ import { HttpClient } from '@angular/common/http';
             <a class="nav-link metallica-border-sides" href="/transfers">Transfers</a>
           </li>
         </ul>
-        <span class="navbar-text robo-condensed metallica-border-left accent1 far-end" (click)="logout()">
-          Logout
-        </span>
         <span class="navbar-text robo-condensed metallica-border-bot far-end">
           {{username}}
         </span>
+        <button class="btn btn-primary metallica-logout far-end" (click)="logout()">
+          Logout
+        </button>
       </div>
     </nav>
     `
@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     // Clearing storage
-    localStorage.clear()
+    sessionStorage.clear()
     // Rerouting to login page
     this.router.navigate(['/'])
   }

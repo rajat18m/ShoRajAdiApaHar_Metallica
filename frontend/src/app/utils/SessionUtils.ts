@@ -9,12 +9,12 @@ export class SessionUtils {
 
     storeParty(party: Party) {
         console.log("Storing object : " + JSON.stringify(party))
-        localStorage.setItem('LOCAL_PARTY', JSON.stringify(party))
+        sessionStorage.setItem('LOCAL_PARTY', JSON.stringify(party))
     }
 
     getCurrentParty(): Party {
-        console.log("Getting item : " + localStorage.getItem('LOCAL_PARTY'))
-        return JSON.parse(localStorage.getItem('LOCAL_PARTY')) as Party
+        console.log("Getting item : " + sessionStorage.getItem('LOCAL_PARTY'))
+        return JSON.parse(sessionStorage.getItem('LOCAL_PARTY')) as Party
     }
 
     validatePartyOnLogin(party: Party, http: HttpClient): Observable<boolean> {

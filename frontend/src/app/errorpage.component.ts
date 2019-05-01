@@ -13,6 +13,7 @@ export class ErrorComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-
+        console.log("Error occurred! Clearing user token.")
+        sessionStorage.clear()
     }
 }

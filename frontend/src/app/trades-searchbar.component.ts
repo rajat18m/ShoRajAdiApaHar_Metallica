@@ -39,7 +39,7 @@ import { ProvisionalCommodity } from 'src/model/ProvisionalCommodity';
             </select>
             </div>
             <div class="col margin-top-super">
-                <button type="submit" class="btn btn-primary metallica-component" (click)="filterSearch(from.value, to.value, metalName.value, side.value, counterparty.value)">Search</button>
+                <a type="submit" class="btn btn-primary metallica-component" (click)="filterSearch(from.value, to.value, metalName.value, side.value, counterparty.value)">Search</a>
             </div>
         </div>
     </form>
@@ -51,7 +51,7 @@ export class TradesSearchBarComponent implements OnInit {
     parties: Array<Party> = []
     commodities: Array<ProvisionalCommodity> = []
 
-    @Output() searchFilters = new EventEmitter<SearchFilters>();
+    @Output() searchFilters = new EventEmitter<string>();
 
     constructor(private http: HttpClient) { }
 
@@ -73,6 +73,6 @@ export class TradesSearchBarComponent implements OnInit {
     filterSearch(from, to, mName, side, counterparty) {
         var filters = new SearchFilters(from as Date, to as Date, mName as string, side as Side, counterparty as string);
         console.log("Filters are : "+JSON.stringify(filters))
-        // this.searchFilters.emit(filters);
+        this.searchFilters.emit(JSON.stringify(filters));
     }
 }
