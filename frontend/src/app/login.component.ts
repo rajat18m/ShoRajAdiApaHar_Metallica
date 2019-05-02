@@ -71,7 +71,13 @@ export class LoginComponent implements OnInit {
           // Alert user about invalid credentials
           alert("Invalid credentials!")
         }
-      })
+      },
+      (error) => {
+        alert("We're current unable to process your request. Please try again later.")
+        console.log("Error occurred!")
+        console.log(error)
+      }
+      )
     })
   }
 }

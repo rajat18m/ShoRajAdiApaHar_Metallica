@@ -39,7 +39,7 @@ import { RegistrationParty } from 'src/model/RegistrationParty';
   <button type="submit" class="btn btn-primary metallica-component" (click)="register(fName.value, lName.value, email.value, password.value)">Register</button>
 </form>
   <div class="card metallica-border-all accent2 contact-us" style="width: 10rem;">
-    <a href="mailto:administrator@metallica.com"><span class="contact-us">Contact Us</span></a>
+    <a href="mailto:metallicatrade@gmail.com"><span class="contact-us">Contact Us</span></a>
     <span class="small-text">(In case you previously own assets or would like to register your location)</span>
   </div>
 </div>

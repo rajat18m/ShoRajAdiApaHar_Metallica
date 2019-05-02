@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionUtils } from './utils/SessionUtils';
+import { Transaction } from 'src/model/Transaction';
 
 @Component({
     selector: 'app-transfers',
@@ -39,7 +40,17 @@ export class TransfersComponent implements OnInit {
         this.http.post('http://10.151.61.56:8082/api/buyTransaction/?Id='+this.id+'&userId='+uID, "Hello").subscribe((result) => {
             console.log("Result of transaction : "+JSON.stringify(result))
             alert("Successfully purchased!")
-            this.router.navigate(['/payment'])
+            this.http.get('http://10.151.61.192:9090/send?message='+"ID ["+this.id+"] has been sold").subscribe((messageRes) => {
+                console.log("Response from Message Queue is : "+JSON.stringify(messageRes))
+                // Putting trade details in sessionStorage to use with Payment Gateway later.
+                sessionStorage.setItem('TRADE_DETAILS', JSON.stringify(new Transaction(this.id, this.name, this.seller, this.price, this.quantity)))
+                console.log("Stored Transaction in sessionStorage : "+JSON.stringify(sessionStorage.getItem('TRADE_DETAILS')))
+                this.router.navigate(['/payment'])
+            }),
+            (error) => {
+                console.log("Error occured!")
+                console.log(error)
+            }
         }),
         (error) => {
             alert("Error Occurred!")
